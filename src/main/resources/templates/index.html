@@ -91,7 +91,7 @@
             <!-- Quadrant 1: Important & Urgent -->
             <div class="quadrant" id="q1-important-urgent">
                 <h2>Important & Urgent</h2>
-                <div th:each="task : ${tasks}" th:if="${task.getQuadrant() == T(com.example.taskmatrix.Quadrant).IMPORTANT_URGENT}" class="task-item">
+                <div th:each="task : ${importantUrgentTasks}" class="task-item">
                     <h4 th:text="${task.title}">Task Title</h4>
                     <p>Due: <span th:text="${task.dueDate != null ? #temporals.format(task.dueDate, 'yyyy-MM-dd') : 'N/A'}">YYYY-MM-DD</span></p>
                     <p th:if="${task.label != null and !task.label.isEmpty()}">Label: <span th:text="${task.label}">Label</span></p>
@@ -103,7 +103,7 @@
                         </form>
                     </div>
                 </div>
-                <div th:if="${#lists.isEmpty(#lists.select(tasks, task -> task.getQuadrant() == T(com.example.taskmatrix.Quadrant).IMPORTANT_URGENT))}" class="empty-quadrant">
+                <div th:if="${#lists.isEmpty(importantUrgentTasks)}" class="empty-quadrant">
                     <p>No tasks in this quadrant.</p>
                 </div>
             </div>
@@ -111,7 +111,7 @@
             <!-- Quadrant 2: Important & Not Urgent -->
             <div class="quadrant" id="q2-important-not-urgent">
                 <h2>Important & Not Urgent</h2>
-                <div th:each="task : ${tasks}" th:if="${task.getQuadrant() == T(com.example.taskmatrix.Quadrant).IMPORTANT_NOT_URGENT}" class="task-item">
+                <div th:each="task : ${importantNotUrgentTasks}" class="task-item">
                     <h4 th:text="${task.title}">Task Title</h4>
                     <p>Due: <span th:text="${task.dueDate != null ? #temporals.format(task.dueDate, 'yyyy-MM-dd') : 'N/A'}">YYYY-MM-DD</span></p>
                     <p th:if="${task.label != null and !task.label.isEmpty()}">Label: <span th:text="${task.label}">Label</span></p>
@@ -123,7 +123,7 @@
                         </form>
                     </div>
                 </div>
-                 <div th:if="${#lists.isEmpty(#lists.select(tasks, task -> task.getQuadrant() == T(com.example.taskmatrix.Quadrant).IMPORTANT_NOT_URGENT))}" class="empty-quadrant">
+                 <div th:if="${#lists.isEmpty(importantNotUrgentTasks)}" class="empty-quadrant">
                     <p>No tasks in this quadrant.</p>
                 </div>
             </div>
@@ -131,7 +131,7 @@
             <!-- Quadrant 3: Not Important & Urgent -->
             <div class="quadrant" id="q3-not-important-urgent">
                 <h2>Not Important & Urgent</h2>
-                <div th:each="task : ${tasks}" th:if="${task.getQuadrant() == T(com.example.taskmatrix.Quadrant).NOT_IMPORTANT_URGENT}" class="task-item">
+                <div th:each="task : ${notImportantUrgentTasks}" class="task-item">
                     <h4 th:text="${task.title}">Task Title</h4>
                     <p>Due: <span th:text="${task.dueDate != null ? #temporals.format(task.dueDate, 'yyyy-MM-dd') : 'N/A'}">YYYY-MM-DD</span></p>
                     <p th:if="${task.label != null and !task.label.isEmpty()}">Label: <span th:text="${task.label}">Label</span></p>
@@ -143,7 +143,7 @@
                         </form>
                     </div>
                 </div>
-                <div th:if="${#lists.isEmpty(#lists.select(tasks, task -> task.getQuadrant() == T(com.example.taskmatrix.Quadrant).NOT_IMPORTANT_URGENT))}" class="empty-quadrant">
+                <div th:if="${#lists.isEmpty(notImportantUrgentTasks)}" class="empty-quadrant">
                     <p>No tasks in this quadrant.</p>
                 </div>
             </div>
@@ -151,7 +151,7 @@
             <!-- Quadrant 4: Not Important & Not Urgent -->
             <div class="quadrant" id="q4-not-important-not-urgent">
                 <h2>Not Important & Not Urgent</h2>
-                <div th:each="task : ${tasks}" th:if="${task.getQuadrant() == T(com.example.taskmatrix.Quadrant).NOT_IMPORTANT_NOT_URGENT}" class="task-item">
+                <div th:each="task : ${notImportantNotUrgentTasks}" class="task-item">
                     <h4 th:text="${task.title}">Task Title</h4>
                     <p>Due: <span th:text="${task.dueDate != null ? #temporals.format(task.dueDate, 'yyyy-MM-dd') : 'N/A'}">YYYY-MM-DD</span></p>
                     <p th:if="${task.label != null and !task.label.isEmpty()}">Label: <span th:text="${task.label}">Label</span></p>
@@ -163,7 +163,7 @@
                         </form>
                     </div>
                 </div>
-                <div th:if="${#lists.isEmpty(#lists.select(tasks, task -> task.getQuadrant() == T(com.example.taskmatrix.Quadrant).NOT_IMPORTANT_NOT_URGENT))}" class="empty-quadrant">
+                <div th:if="${#lists.isEmpty(notImportantNotUrgentTasks)}" class="empty-quadrant">
                     <p>No tasks in this quadrant.</p>
                 </div>
             </div>
