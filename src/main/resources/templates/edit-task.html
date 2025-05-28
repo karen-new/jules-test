@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Task</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+</head>
+<body>
+    <div class="form-container">
+        <h1>Edit Task</h1>
+        <form th:action="@{/tasks/update/{id}(id=${task.id})}" th:object="${task}" method="post">
+            <input type="hidden" th:field="*{id}" /> <!-- Important for update -->
+            <div>
+                <label for="title">Title:</label>
+                <input type="text" id="title" th:field="*{title}" />
+                <p th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="error-message"></p>
+            </div>
+            <div>
+                <label for="details">Details:</label>
+                <textarea id="details" th:field="*{details}" rows="4"></textarea>
+            </div>
+            <div>
+                <label for="label">Label:</label>
+                <input type="text" id="label" th:field="*{label}" />
+            </div>
+            <div>
+                <label for="dueDate">Due Date:</label>
+                <input type="date" id="dueDate" th:field="*{dueDate}" />
+            </div>
+            <div>
+                <label for="importance">Importance:</label>
+                <select id="importance" th:field="*{importance}">
+                    <option value="">-- Select Importance --</option>
+                    <option th:each="imp : ${importanceValues}"
+                            th:value="${imp}"
+                            th:text="${imp.toString()}"
+                            th:selected="${imp == task.importance}"></option>
+                </select>
+                <p th:if="${#fields.hasErrors('importance')}" th:errors="*{importance}" class="error-message"></p>
+            </div>
+            <div>
+                <label for="urgency">Urgency:</label>
+                <select id="urgency" th:field="*{urgency}">
+                    <option value="">-- Select Urgency --</option>
+                    <option th:each="urg : ${urgencyValues}"
+                            th:value="${urg}"
+                            th:text="${urg.toString()}"
+                            th:selected="${urg == task.urgency}"></option>
+                </select>
+                <p th:if="${#fields.hasErrors('urgency')}" th:errors="*{urgency}" class="error-message"></p>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-save">Save Changes</button>
+                <a th:href="@{/}" class="btn btn-cancel">Cancel</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
