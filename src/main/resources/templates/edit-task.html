@@ -3,57 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <title>Edit Task</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
 </head>
 <body>
-    <div class="form-container">
-        <h1>Edit Task</h1>
-        <form th:action="@{/tasks/update/{id}(id=${task.id})}" th:object="${task}" method="post">
-            <input type="hidden" th:field="*{id}" /> <!-- Important for update -->
-            <div>
-                <label for="title">Title:</label>
-                <input type="text" id="title" th:field="*{title}" />
-                <p th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="error-message"></p>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <div class="form-container p-4 border rounded shadow-sm">
+                    <h1 class="text-center mb-4">Edit Task</h1>
+                    <form th:action="@{/tasks/update/{id}(id=${task.id})}" th:object="${task}" method="post">
+                        <input type="hidden" th:field="*{id}" /> <!-- Important for update -->
+                        <div class="mb-3">
+                            <label for="title" class="form-label">Title:</label>
+                            <input type="text" id="title" class="form-control" th:field="*{title}" />
+                            <p th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="text-danger"></p>
+                        </div>
+                        <div class="mb-3">
+                            <label for="details" class="form-label">Details:</label>
+                            <textarea id="details" class="form-control" th:field="*{details}" rows="4"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="label" class="form-label">Label:</label>
+                            <input type="text" id="label" class="form-control" th:field="*{label}" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="dueDate" class="form-label">Due Date:</label>
+                            <input type="date" id="dueDate" class="form-control" th:field="*{dueDate}" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="importance" class="form-label">Importance:</label>
+                            <select id="importance" class="form-select" th:field="*{importance}">
+                                <option value="">-- Select Importance --</option>
+                                <option th:each="imp : ${importanceValues}"
+                                        th:value="${imp}"
+                                        th:text="${imp.toString()}"
+                                        th:selected="${imp == task.importance}"></option>
+                            </select>
+                            <p th:if="${#fields.hasErrors('importance')}" th:errors="*{importance}" class="text-danger"></p>
+                        </div>
+                        <div class="mb-3">
+                            <label for="urgency" class="form-label">Urgency:</label>
+                            <select id="urgency" class="form-select" th:field="*{urgency}">
+                                <option value="">-- Select Urgency --</option>
+                                <option th:each="urg : ${urgencyValues}"
+                                        th:value="${urg}"
+                                        th:text="${urg.toString()}"
+                                        th:selected="${urg == task.urgency}"></option>
+                            </select>
+                            <p th:if="${#fields.hasErrors('urgency')}" th:errors="*{urgency}" class="text-danger"></p>
+                        </div>
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                            <a th:href="@{/}" class="btn btn-secondary">Cancel</a>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div>
-                <label for="details">Details:</label>
-                <textarea id="details" th:field="*{details}" rows="4"></textarea>
-            </div>
-            <div>
-                <label for="label">Label:</label>
-                <input type="text" id="label" th:field="*{label}" />
-            </div>
-            <div>
-                <label for="dueDate">Due Date:</label>
-                <input type="date" id="dueDate" th:field="*{dueDate}" />
-            </div>
-            <div>
-                <label for="importance">Importance:</label>
-                <select id="importance" th:field="*{importance}">
-                    <option value="">-- Select Importance --</option>
-                    <option th:each="imp : ${importanceValues}"
-                            th:value="${imp}"
-                            th:text="${imp.toString()}"
-                            th:selected="${imp == task.importance}"></option>
-                </select>
-                <p th:if="${#fields.hasErrors('importance')}" th:errors="*{importance}" class="error-message"></p>
-            </div>
-            <div>
-                <label for="urgency">Urgency:</label>
-                <select id="urgency" th:field="*{urgency}">
-                    <option value="">-- Select Urgency --</option>
-                    <option th:each="urg : ${urgencyValues}"
-                            th:value="${urg}"
-                            th:text="${urg.toString()}"
-                            th:selected="${urg == task.urgency}"></option>
-                </select>
-                <p th:if="${#fields.hasErrors('urgency')}" th:errors="*{urgency}" class="error-message"></p>
-            </div>
-            <div>
-                <button type="submit" class="btn btn-save">Save Changes</button>
-                <a th:href="@{/}" class="btn btn-cancel">Cancel</a>
-            </div>
-        </form>
+        </div>
     </div>
 </body>
 </html>
